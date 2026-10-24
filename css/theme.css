@@ -1,0 +1,450 @@
+/* ==========================================================================
+   PENTIUM TACTILE CARDBOARD DESK THEME - DESIGN SYSTEM
+   Derived from the Pentium Superscalar Architecture Video
+   ========================================================================== */
+
+:root {
+  /* Surface & Desk Palette */
+  --desk-bg: #ece8df;
+  --desk-cardboard: #f1ece2;
+  --desk-cardboard-dark: #e2d9cc;
+  --desk-grid-dot: #cfc5b3;
+  --card-white: #ffffff;
+  --card-ivory: #fdfbf7;
+  --card-slate: #f8fafc;
+  --card-cream: #fffbeb;
+
+  /* Ink & Outlines */
+  --ink-black: #1c1917;
+  --ink-slate: #0f172a;
+  --ink-muted: #57534e;
+  --border-thick: 3.5px solid var(--ink-black);
+  --border-heavy: 4.5px solid var(--ink-black);
+  --border-thin: 2.5px solid var(--ink-black);
+
+  /* Hard Offset Neo-Brutalist Box Shadows (Zero Blur!) */
+  --shadow-sm: 3px 3px 0px var(--ink-black);
+  --shadow-md: 5px 6px 0px var(--ink-black);
+  --shadow-lg: 8px 10px 0px var(--ink-black);
+  --shadow-xl: 12px 14px 0px var(--ink-black);
+  --shadow-hover: 7px 8px 0px var(--ink-black);
+
+  /* Characteristic Pentium Theme Accent Colors */
+  --pentium-cyan: #0284c7;       /* U-Pipe / Primary Headings / Data Paths */
+  --pentium-cyan-light: #38bdf8;
+  --pentium-cyan-pale: #e0f2fe;
+
+  --pentium-yellow: #fde047;     /* V-Pipe / Warning / Ruler / Rule Tapes */
+  --pentium-amber: #f59e0b;
+  --pentium-yellow-pale: #fef9c3;
+  --pentium-brown: #78350f;
+
+  --pentium-coral: #ef4444;      /* Alerts / Stalls / Negative Flags / CPU Body */
+  --pentium-crimson: #b91c1c;
+  --pentium-coral-pale: #fee2e2;
+
+  --pentium-mint: #10b981;       /* Hits / Zero Flag / Validated State */
+  --pentium-mint-dark: #047857;
+  --pentium-mint-pale: #d1fae5;
+
+  --pentium-purple: #8b5cf6;     /* Control Flow / Interrupts / Tags */
+  --pentium-purple-pale: #ede9fe;
+
+  --pentium-slate: #1e293b;      /* Architecture Boards & Terminal Housings */
+  --pentium-slate-dark: #0f172a;
+
+  /* Typography Stacks */
+  --font-display: 'Bungee', cursive, sans-serif;
+  --font-stamp: 'Permanent Marker', cursive, sans-serif;
+  --font-body: 'Space Grotesk', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', "Courier New", Courier, monospace;
+
+  /* UI Spacing & Transitions */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-full: 9999px;
+  --transition-tactile: transform 0.12s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.12s cubic-bezier(0.2, 0, 0, 1);
+}
+
+/* Reset & Base Elements */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--desk-bg);
+  color: var(--ink-black);
+  font-family: var(--font-body);
+  font-weight: 500;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Tactile Cardboard Desk Textured Background */
+.desk-viewport {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--desk-cardboard);
+  background-image: 
+    radial-gradient(var(--desk-grid-dot) 1.5px, transparent 1.5px),
+    radial-gradient(var(--desk-grid-dot) 1.5px, var(--desk-cardboard) 1.5px);
+  background-size: 36px 36px;
+  background-position: 0 0, 18px 18px;
+}
+
+/* Subtle Organic Cardboard Fibers Overlay */
+.cardboard-fibers {
+  position: fixed;
+  inset: 0;
+  opacity: 0.08;
+  background-image: 
+    repeating-linear-gradient(45deg, var(--ink-black), var(--ink-black) 1px, transparent 2px, transparent 12px),
+    repeating-linear-gradient(-45deg, var(--pentium-brown), var(--pentium-brown) 1px, transparent 2px, transparent 16px);
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* Desk Edge Vignette */
+.desk-vignette {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, transparent 65%, rgba(28, 25, 23, 0.16) 100%);
+  pointer-events: none;
+  z-index: 998;
+}
+
+/* Carpenter Ruler along Bottom Dock (Decorative & Functional) */
+.desk-ruler {
+  position: fixed;
+  bottom: 0;
+  left: 280px;
+  right: 0;
+  height: 24px;
+  background: var(--pentium-yellow);
+  border-top: 2.5px solid var(--ink-black);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--pentium-brown);
+  user-select: none;
+  z-index: 100;
+  letter-spacing: 0.1em;
+}
+
+/* Coffee Stain Accent in Top Right */
+.coffee-stain {
+  position: fixed;
+  top: 15px;
+  right: 40px;
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  border: 10px solid rgba(146, 64, 14, 0.09);
+  filter: blur(1.5px);
+  transform: rotate(18deg) scaleX(1.08);
+  pointer-events: none;
+  z-index: 90;
+}
+
+/* ==========================================================================
+   TACTILE UI COMPONENTS: CARDS, TAPES, BADGES, PILLS & STAMPS
+   ========================================================================== */
+
+/* Main Card Element */
+.paper-card {
+  background: var(--card-white);
+  border: var(--border-thick);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  padding: 24px;
+  position: relative;
+  transition: var(--transition-tactile);
+}
+
+.paper-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+.paper-card.card-ivory { background: var(--card-ivory); }
+.paper-card.card-slate { background: var(--card-slate); }
+.paper-card.card-dark {
+  background: var(--pentium-slate);
+  color: #ffffff;
+  border-color: var(--ink-black);
+}
+
+/* Organic Tilt Modifiers */
+.tilt-left { transform: rotate(-0.8deg); }
+.tilt-right { transform: rotate(0.8deg); }
+.tilt-more-left { transform: rotate(-1.5deg); }
+.tilt-more-right { transform: rotate(1.5deg); }
+
+/* Masking Tape Banners & Persona Tags */
+.tape-banner {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--card-white);
+  border: var(--border-thin);
+  box-shadow: var(--shadow-sm);
+  padding: 6px 16px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-black);
+  transform: rotate(-1deg);
+  user-select: none;
+}
+
+.tape-banner.tape-cyan {
+  background: var(--pentium-cyan);
+  color: #ffffff;
+}
+
+.tape-banner.tape-yellow {
+  background: var(--pentium-yellow);
+  color: var(--ink-black);
+  transform: rotate(1.2deg);
+}
+
+.tape-banner.tape-coral {
+  background: var(--pentium-coral);
+  color: #ffffff;
+}
+
+.tape-banner.tape-mint {
+  background: var(--pentium-mint);
+  color: #ffffff;
+}
+
+.tape-pinned {
+  position: absolute;
+  top: -16px;
+  left: 24px;
+  z-index: 10;
+}
+
+/* High-Impact Rubber Stamp Marks */
+.rubber-stamp {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 14px;
+  padding: 4px 12px;
+  border: 3.5px solid var(--pentium-coral);
+  color: var(--pentium-coral);
+  border-radius: 4px;
+  transform: rotate(-6deg);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  user-select: none;
+  box-shadow: 0 0 0 1.5px rgba(239, 68, 68, 0.2);
+}
+
+.rubber-stamp.stamp-green {
+  border-color: var(--pentium-mint-dark);
+  color: var(--pentium-mint-dark);
+  transform: rotate(4deg);
+}
+
+.rubber-stamp.stamp-cyan {
+  border-color: var(--pentium-cyan);
+  color: var(--pentium-cyan);
+  transform: rotate(-3deg);
+}
+
+.rubber-stamp.stamp-lg {
+  font-size: 20px;
+  padding: 8px 20px;
+  border-width: 4.5px;
+}
+
+/* Tactile Buttons */
+.tactile-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--card-white);
+  border: var(--border-thick);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+  padding: 10px 20px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink-black);
+  cursor: pointer;
+  user-select: none;
+  transition: var(--transition-tactile);
+  text-decoration: none;
+}
+
+.tactile-btn:hover {
+  transform: translate(-1.5px, -1.5px);
+  box-shadow: var(--shadow-md);
+}
+
+.tactile-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0px var(--ink-black);
+}
+
+.tactile-btn.btn-primary {
+  background: var(--pentium-cyan);
+  color: #ffffff;
+}
+
+.tactile-btn.btn-accent {
+  background: var(--pentium-yellow);
+  color: var(--ink-black);
+}
+
+.tactile-btn.btn-danger {
+  background: var(--pentium-coral);
+  color: #ffffff;
+}
+
+.tactile-btn.btn-success {
+  background: var(--pentium-mint);
+  color: #ffffff;
+}
+
+.tactile-btn.btn-sm {
+  padding: 6px 12px;
+  font-size: 12px;
+  border-width: 2.5px;
+}
+
+/* Pill Badges & Chips */
+.tactile-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  background: var(--card-slate);
+  border: var(--border-thin);
+  border-radius: var(--radius-full);
+  box-shadow: 2px 2px 0px var(--ink-black);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--ink-black);
+}
+
+.tactile-chip.chip-cyan { background: var(--pentium-cyan-pale); color: var(--pentium-cyan); }
+.tactile-chip.chip-yellow { background: var(--pentium-yellow-pale); color: var(--pentium-brown); }
+.tactile-chip.chip-coral { background: var(--pentium-coral-pale); color: var(--pentium-crimson); }
+.tactile-chip.chip-mint { background: var(--pentium-mint-pale); color: var(--pentium-mint-dark); }
+.tactile-chip.chip-purple { background: var(--pentium-purple-pale); color: var(--pentium-purple); }
+
+/* Highlight Text Spans */
+.hl-cyan {
+  background: var(--pentium-cyan-pale);
+  color: var(--pentium-cyan);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 800;
+  border-bottom: 2px solid var(--pentium-cyan);
+}
+
+.hl-yellow {
+  background: var(--pentium-yellow);
+  color: var(--ink-black);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 800;
+  border-bottom: 2px solid var(--pentium-brown);
+}
+
+.hl-green {
+  background: var(--pentium-mint-pale);
+  color: var(--pentium-mint-dark);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 800;
+  border-bottom: 2px solid var(--pentium-mint);
+}
+
+.hl-coral {
+  background: var(--pentium-coral-pale);
+  color: var(--pentium-crimson);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 800;
+  border-bottom: 2px solid var(--pentium-coral);
+}
+
+/* Screw Rivets on Technical Cards */
+.screw-head {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: #cbd5e1;
+  border: 1.5px solid var(--ink-black);
+  border-radius: 50%;
+}
+
+.screw-head::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 2px;
+  right: 2px;
+  height: 1px;
+  background: var(--ink-black);
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.screw-tl { top: 8px; left: 8px; }
+.screw-tr { top: 8px; right: 8px; }
+.screw-bl { bottom: 8px; left: 8px; }
+.screw-br { bottom: 8px; right: 8px; }
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .desk-ruler {
+    left: 0;
+  }
+  .paper-card {
+    padding: 18px;
+    box-shadow: var(--shadow-sm);
+  }
+}
+
+@media (max-width: 640px) {
+  .desk-ruler {
+    left: 0;
+    font-size: 9px;
+    padding: 0 6px;
+    justify-content: space-around;
+  }
+  .desk-ruler span:last-child {
+    display: none;
+  }
+  .coffee-stain {
+    display: none;
+  }
+}

@@ -1,0 +1,970 @@
+/* ==========================================================================
+   INTERACTIVE COMPONENTS, LESSON CONTAINERS & HARDWARE VISUALIZERS
+   Pentium cardboard aesthetic applied to processors, registers, and memory
+   ========================================================================== */
+
+/* ==========================================================================
+   1. UNIVERSAL 7-PART LESSON STRUCTURE (A to G)
+   ========================================================================== */
+.lesson-card {
+  margin-bottom: 32px;
+  position: relative;
+}
+
+.lesson-section-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.lesson-section-title h2 {
+  font-family: var(--font-body);
+  font-size: 26px;
+  font-weight: 900;
+  color: var(--ink-black);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.lesson-subtitle {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--pentium-cyan);
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+/* Part Pillars & Tabs within a Lesson */
+.lesson-pill-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.lesson-part-pill {
+  background: var(--card-slate);
+  border: var(--border-thin);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  transition: var(--transition-tactile);
+  box-shadow: 2px 2px 0px var(--ink-black);
+}
+
+.lesson-part-pill:hover {
+  transform: translateY(-2px);
+  background: var(--card-white);
+  box-shadow: 3px 3px 0px var(--ink-black);
+}
+
+.lesson-part-pill.active {
+  background: var(--pentium-yellow);
+  border-color: var(--ink-black);
+  box-shadow: 3px 3px 0px var(--ink-black);
+  transform: translateY(-2px);
+}
+
+.part-letter {
+  font-family: var(--font-display);
+  font-size: 12px;
+  color: var(--pentium-cyan);
+}
+
+.lesson-part-pill.active .part-letter {
+  color: var(--pentium-brown);
+}
+
+.part-name {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--ink-black);
+}
+
+/* Content Blocks for 7 Steps */
+.step-pane {
+  display: none;
+}
+
+.step-pane.active {
+  display: block;
+}
+
+/* ==========================================================================
+   2. HARDWARE STYLING: REGISTERS, MEMORY CELLS & FLAGS
+   ========================================================================== */
+
+/* Register Bank Display */
+.register-bank {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 12px;
+  background: var(--card-ivory);
+  border: var(--border-thin);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  box-shadow: inset 2px 2px 0px rgba(0,0,0,0.06);
+  margin-bottom: 18px;
+}
+
+.register-slot {
+  background: var(--card-white);
+  border: var(--border-thin);
+  border-radius: var(--radius-sm);
+  box-shadow: 2px 2px 0px var(--ink-black);
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.15s ease;
+}
+
+.register-slot.highlighted {
+  background: var(--pentium-yellow-pale);
+  border-color: var(--pentium-amber);
+  box-shadow: 3px 3px 0px var(--pentium-brown);
+  transform: scale(1.03);
+}
+
+.reg-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 900;
+  color: var(--pentium-cyan);
+  text-transform: uppercase;
+}
+
+.reg-desc {
+  font-size: 9px;
+  color: var(--ink-muted);
+}
+
+.reg-value {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 900;
+  color: var(--ink-black);
+  margin-top: 4px;
+  letter-spacing: 0.05em;
+}
+
+.reg-subdivisions {
+  display: flex;
+  gap: 4px;
+  margin-top: 4px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+}
+
+.reg-sub-half {
+  flex: 1;
+  background: var(--card-slate);
+  border: 1px solid var(--ink-black);
+  border-radius: 3px;
+  padding: 2px 4px;
+  text-align: center;
+}
+
+/* FLAGS Register Interactive Strip */
+.flags-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  background: var(--pentium-slate);
+  padding: 14px 18px;
+  border: var(--border-thick);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+  margin: 16px 0;
+  align-items: center;
+}
+
+.flags-strip-label {
+  font-family: var(--font-display);
+  font-size: 12px;
+  color: var(--pentium-yellow);
+  letter-spacing: 0.1em;
+  margin-right: 8px;
+}
+
+.flag-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--card-white);
+  border: 2px solid var(--ink-black);
+  border-radius: 4px;
+  padding: 4px 8px;
+  min-width: 44px;
+  box-shadow: 2px 2px 0px #000;
+  user-select: none;
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+
+.flag-box:hover {
+  transform: translateY(-2px);
+}
+
+.flag-box.flag-active {
+  background: var(--pentium-mint);
+  color: #ffffff;
+}
+
+.flag-box.flag-active .flag-val {
+  color: #ffffff;
+}
+
+.flag-name {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.flag-val {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 900;
+  color: var(--ink-black);
+}
+
+/* Bit Array / Bit Shifter Component */
+.bit-row {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  margin: 12px 0;
+  overflow-x: auto;
+  padding-bottom: 6px;
+}
+
+.bit-cell {
+  width: 36px;
+  height: 44px;
+  background: var(--card-white);
+  border: var(--border-thin);
+  border-radius: 4px;
+  box-shadow: 2px 2px 0px var(--ink-black);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-weight: 900;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.12s ease;
+}
+
+.bit-cell.active {
+  background: var(--pentium-cyan);
+  color: #ffffff;
+}
+
+.bit-cell.carry-out {
+  border-color: var(--pentium-coral);
+  background: var(--pentium-coral-pale);
+  color: var(--pentium-coral);
+}
+
+.bit-num {
+  font-size: 8px;
+  color: var(--ink-muted);
+}
+
+.bit-cell.active .bit-num {
+  color: #ffffff;
+}
+
+.bit-val {
+  font-size: 16px;
+}
+
+/* ==========================================================================
+   3. PIPELINE & STEP-BY-STEP ANIMATION CONVEYOR
+   (Inspired by U-Pipe & V-Pipe Dual Conveyor from Reference Film)
+   ========================================================================== */
+.conveyor-box {
+  background: var(--card-white);
+  border: var(--border-heavy);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  padding: 24px;
+  margin: 20px 0;
+  position: relative;
+}
+
+.pipeline-stepper-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--card-slate);
+  border: var(--border-thin);
+  border-radius: var(--radius-sm);
+  padding: 10px 16px;
+  margin-bottom: 20px;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.stepper-btn-group {
+  display: flex;
+  gap: 8px;
+}
+
+.step-counter-badge {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 900;
+  padding: 4px 12px;
+  background: var(--pentium-yellow);
+  border: var(--border-thin);
+  box-shadow: 2px 2px 0px var(--ink-black);
+  border-radius: var(--radius-sm);
+}
+
+.pipeline-stages-track {
+  display: flex;
+  align-items: stretch;
+  gap: 12px;
+  overflow-x: auto;
+  padding: 10px 0 20px;
+}
+
+.pipeline-stage-card {
+  flex: 1;
+  min-width: 170px;
+  background: var(--card-ivory);
+  border: var(--border-thick);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: all 0.2s cubic-bezier(0.18, 0.89, 0.32, 1.2);
+}
+
+.pipeline-stage-card.current {
+  background: var(--pentium-cyan-pale);
+  border-color: var(--pentium-cyan);
+  box-shadow: 4px 6px 0px var(--pentium-cyan);
+  transform: translateY(-4px) scale(1.02);
+}
+
+.pipeline-stage-card.completed {
+  border-color: var(--pentium-mint-dark);
+  background: var(--pentium-mint-pale);
+}
+
+.stage-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 900;
+  color: var(--pentium-cyan);
+  margin-bottom: 8px;
+}
+
+.stage-title {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 800;
+  margin-bottom: 6px;
+  color: var(--ink-black);
+}
+
+.stage-desc {
+  font-size: 12px;
+  color: var(--ink-muted);
+  line-height: 1.4;
+  flex: 1;
+}
+
+.stage-chip-status {
+  margin-top: 10px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 800;
+  padding: 2px 6px;
+  background: var(--card-white);
+  border: 1.5px solid var(--ink-black);
+  border-radius: 4px;
+  align-self: flex-start;
+}
+
+/* ==========================================================================
+   4. ADDRESS TRANSLATION & MEMORY MAPPING EXPLORERS
+   (8086 Physical Address, 386 Two-Level Paging, Combined Pipeline)
+   ========================================================================== */
+.address-breakdown-box {
+  background: var(--card-slate);
+  border: var(--border-thick);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-md);
+  padding: 20px;
+  margin: 18px 0;
+}
+
+.address-bar-visual {
+  display: flex;
+  height: 48px;
+  border: var(--border-thick);
+  border-radius: var(--radius-sm);
+  box-shadow: 3px 3px 0px var(--ink-black);
+  overflow: hidden;
+  margin: 14px 0;
+}
+
+.address-chunk {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-family: var(--font-mono);
+  font-weight: 900;
+  padding: 0 8px;
+  position: relative;
+  transition: flex 0.2s ease;
+}
+
+.address-chunk.chunk-dir {
+  background: var(--pentium-cyan);
+}
+
+.address-chunk.chunk-page {
+  background: var(--pentium-purple);
+}
+
+.address-chunk.chunk-offset {
+  background: var(--pentium-amber);
+  color: var(--ink-black);
+}
+
+.chunk-tag {
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  opacity: 0.9;
+}
+
+.chunk-val {
+  font-size: 13px;
+}
+
+.chunk-bits {
+  font-size: 9px;
+  opacity: 0.8;
+}
+
+/* Calculation Step Flow */
+.calc-step-flow {
+  background: var(--card-white);
+  border: var(--border-thin);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  margin: 12px 0;
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+
+.calc-formula-line {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  background: var(--card-ivory);
+  border-radius: 4px;
+  margin-bottom: 6px;
+  border-left: 4px solid var(--pentium-cyan);
+  font-weight: 700;
+}
+
+.calc-formula-line.result {
+  border-left-color: var(--pentium-mint);
+  background: var(--pentium-mint-pale);
+  font-weight: 900;
+  font-size: 15px;
+}
+
+/* ==========================================================================
+   5. CACHE MEMORY SIMULATOR MAPPING GRID
+   (Direct Mapped, 2-Way, 4-Way, Fully Associative with Hits & Misses)
+   ========================================================================== */
+.cache-stats-bar {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.cache-stat-pill {
+  flex: 1;
+  min-width: 120px;
+  background: var(--card-white);
+  border: var(--border-thin);
+  border-radius: var(--radius-sm);
+  box-shadow: 2px 2px 0px var(--ink-black);
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--ink-muted);
+  text-transform: uppercase;
+}
+
+.stat-value {
+  font-family: var(--font-mono);
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--ink-black);
+}
+
+.cache-table-wrapper {
+  overflow-x: auto;
+  border: var(--border-thick);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+  background: var(--card-white);
+}
+
+.cache-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+.cache-table th {
+  background: var(--pentium-slate);
+  color: #ffffff;
+  padding: 10px 14px;
+  text-align: left;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  border-bottom: var(--border-thick);
+}
+
+.cache-table td {
+  padding: 10px 14px;
+  border-bottom: 1.5px solid #e2e8f0;
+}
+
+.cache-table tr:last-child td {
+  border-bottom: none;
+}
+
+.cache-table tr.highlight-hit {
+  background: var(--pentium-mint-pale);
+  animation: flashHit 0.6s ease;
+}
+
+.cache-table tr.highlight-miss {
+  background: var(--pentium-coral-pale);
+  animation: flashMiss 0.6s ease;
+}
+
+/* ==========================================================================
+   6. CODE BLOCKS & ASSEMBLY DISPLAY
+   ========================================================================== */
+.code-panel {
+  background: var(--pentium-slate-dark);
+  color: #f8fafc;
+  border: var(--border-thick);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-md);
+  margin: 16px 0;
+  overflow: hidden;
+}
+
+.code-header {
+  background: var(--pentium-slate);
+  padding: 8px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid var(--ink-black);
+}
+
+.code-title {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 900;
+  color: var(--pentium-yellow);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.code-copy-btn {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.code-copy-btn:hover {
+  background: var(--pentium-cyan);
+  border-color: var(--pentium-cyan);
+}
+
+.code-body {
+  padding: 16px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.6;
+  overflow-x: auto;
+}
+
+.asm-comment { color: #94a3b8; font-style: italic; }
+.asm-mnemonic { color: #38bdf8; font-weight: 800; }
+.asm-register { color: #fde047; font-weight: 700; }
+.asm-operand { color: #4ade80; }
+.asm-number { color: #f43f5e; font-weight: 700; }
+
+/* ==========================================================================
+   7. QUIZ & PRACTICE ZONE CARDS
+   ========================================================================== */
+.quiz-container {
+  background: var(--card-white);
+  border: var(--border-heavy);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  padding: 28px;
+  margin: 24px 0;
+  position: relative;
+}
+
+.quiz-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.quiz-question-text {
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1.45;
+  margin-bottom: 20px;
+  color: var(--ink-black);
+}
+
+.quiz-options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.quiz-option-btn {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--card-ivory);
+  border: var(--border-thick);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+  padding: 12px 18px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink-black);
+  cursor: pointer;
+  text-align: left;
+  transition: var(--transition-tactile);
+}
+
+.quiz-option-btn:hover {
+  background: var(--card-white);
+  transform: translateX(4px);
+  box-shadow: var(--shadow-md);
+}
+
+.quiz-option-btn.selected {
+  background: var(--pentium-cyan-pale);
+  border-color: var(--pentium-cyan);
+  box-shadow: 3px 3px 0px var(--pentium-cyan);
+}
+
+.quiz-option-btn.correct {
+  background: var(--pentium-mint-pale);
+  border-color: var(--pentium-mint-dark);
+  color: var(--pentium-mint-dark);
+  box-shadow: 3px 3px 0px var(--pentium-mint-dark);
+}
+
+.quiz-option-btn.incorrect {
+  background: var(--pentium-coral-pale);
+  border-color: var(--pentium-coral);
+  color: var(--pentium-crimson);
+  box-shadow: 3px 3px 0px var(--pentium-coral);
+}
+
+.option-badge {
+  width: 26px;
+  height: 26px;
+  background: var(--card-white);
+  border: 2px solid var(--ink-black);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 900;
+  flex-shrink: 0;
+}
+
+.quiz-explanation-box {
+  display: none;
+  background: var(--card-slate);
+  border: var(--border-thick);
+  border-radius: var(--radius-sm);
+  padding: 18px;
+  margin-top: 20px;
+  font-size: 14px;
+  line-height: 1.55;
+  box-shadow: var(--shadow-sm);
+}
+
+.quiz-explanation-box.show {
+  display: block;
+}
+
+/* Trap / Caution Callout Alert Box */
+.exam-trap-box {
+  background: var(--pentium-yellow-pale);
+  border: var(--border-thick);
+  border-left: 8px solid var(--pentium-brown);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+  padding: 16px 20px;
+  margin: 18px 0;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.trap-header {
+  font-family: var(--font-display);
+  font-size: 13px;
+  color: var(--pentium-brown);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+  letter-spacing: 0.05em;
+}
+
+/* ==========================================================================
+   MOBILE PHONE OPTIMIZATIONS (Max-width: 640px)
+   Enhanced touch-friendliness, no content clipping, smooth scrolling
+   ========================================================================== */
+@media (max-width: 640px) {
+  /* Headings & Lesson Containers */
+  .lesson-section-title {
+    margin-bottom: 16px;
+  }
+
+  .lesson-section-title h2 {
+    font-size: 19px;
+    flex-wrap: wrap;
+    line-height: 1.25;
+    gap: 8px;
+  }
+
+  .lesson-subtitle {
+    font-size: 11px;
+    line-height: 1.4;
+  }
+
+  /* 7-Step Pillars */
+  .lesson-pill-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+    margin-bottom: 18px;
+  }
+
+  .lesson-part-pill {
+    padding: 6px 10px;
+  }
+
+  .part-letter {
+    font-size: 11px;
+  }
+
+  .part-name {
+    font-size: 11px;
+  }
+
+  /* Cards & Pinned Tape Badges */
+  .paper-card {
+    padding: 16px 12px;
+  }
+
+  .tape-banner {
+    font-size: 11px;
+    padding: 4px 10px;
+    max-width: calc(100% - 20px);
+    white-space: normal;
+    text-align: center;
+    line-height: 1.3;
+  }
+
+  .tape-pinned {
+    left: 10px;
+    top: -12px;
+  }
+
+  /* Interactive Buttons */
+  .tactile-btn {
+    padding: 8px 14px;
+    font-size: 12px;
+  }
+
+  .tactile-btn.btn-sm {
+    padding: 6px 10px;
+    font-size: 11px;
+  }
+
+  /* Hardware Simulators: Registers & Flags */
+  .register-bank {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    padding: 10px;
+  }
+
+  .register-slot {
+    padding: 6px 8px;
+  }
+
+  .reg-value {
+    font-size: 13px;
+  }
+
+  .reg-subdivisions {
+    font-size: 9px;
+    gap: 2px;
+  }
+
+  .flags-strip {
+    padding: 10px;
+    gap: 6px;
+    justify-content: center;
+  }
+
+  .flag-box {
+    min-width: 38px;
+    padding: 3px 6px;
+  }
+
+  .flag-val {
+    font-size: 12px;
+  }
+
+  /* Smooth Touch-Scroll for Tables and Pipeline Tracks */
+  .cache-table-wrapper,
+  .pipeline-stages-track,
+  .bit-row,
+  .module-tabs-strip {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .cache-table th,
+  .cache-table td {
+    padding: 7px 8px;
+    font-size: 11px;
+  }
+
+  .cache-stats-bar {
+    gap: 8px;
+  }
+
+  .cache-stat-pill {
+    min-width: 80px;
+    padding: 8px 10px;
+  }
+
+  .stat-value {
+    font-size: 16px;
+  }
+
+  /* Address Bar & Pipeline Stages */
+  .address-breakdown-box {
+    padding: 14px 10px;
+  }
+
+  .address-bar-visual {
+    height: 42px;
+  }
+
+  .chunk-val {
+    font-size: 11px;
+  }
+
+  .chunk-tag {
+    font-size: 9px;
+  }
+
+  .chunk-bits {
+    font-size: 8px;
+  }
+
+  .conveyor-box {
+    padding: 16px 12px;
+  }
+
+  .pipeline-stage-card {
+    min-width: 150px;
+    padding: 10px;
+  }
+
+  /* Quizzes & Practice Zone */
+  .quiz-container {
+    padding: 18px 14px;
+  }
+
+  .quiz-question-text {
+    font-size: 15px;
+    line-height: 1.4;
+  }
+
+  .quiz-option-btn {
+    padding: 10px 12px;
+    font-size: 13px;
+    gap: 10px;
+  }
+
+  .quiz-explanation-box {
+    padding: 14px 12px;
+    font-size: 13px;
+  }
+
+  .exam-trap-box {
+    padding: 12px 14px;
+    font-size: 12px;
+  }
+}

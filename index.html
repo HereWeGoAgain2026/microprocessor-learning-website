@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Intel Pentium Superscalar Architecture: Module II & III Interactive Learning Lab</title>
+
+    <!-- Google Fonts matching the authentic tactile cardboard desk video theme -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bungee&family=JetBrains+Mono:wght@700;800;900&family=Permanent+Marker&family=Space+Grotesk:wght@600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="./css/theme.css" />
+    <link rel="stylesheet" href="./css/layout.css" />
+    <link rel="stylesheet" href="./css/components.css" />
+    <link rel="stylesheet" href="./css/animations.css" />
+  </head>
+  <body>
+    <!-- Physical Cardboard Desk Background Texture Layers -->
+    <div class="desk-viewport">
+      <div class="cardboard-fibers"></div>
+      <div class="desk-vignette"></div>
+      <div class="coffee-stain"></div>
+
+      <!-- Bottom Carpenter Ruler with Metric Ticks -->
+      <div class="desk-ruler">
+        <span>|'''|'''|'''| 0cm</span>
+        <span>|'''|'''|'''| 5cm</span>
+        <span>|'''|'''|'''| 10cm</span>
+        <span>|'''|'''|'''| 15cm</span>
+        <span>|'''|'''|'''| 20cm</span>
+        <span>|'''|'''|'''| 25cm</span>
+        <span>PENTIUM DUAL-PIPELINE SUPERSCALAR BENCHMARK RULER</span>
+      </div>
+
+      <!-- App Shell Grid -->
+      <div id="app-shell">
+        <!-- ================================================================
+             TACTILE SIDEBAR NAVIGATION
+             ================================================================ -->
+        <aside id="sidebar">
+          <!-- Sidebar Brand Header -->
+          <div class="sidebar-header">
+            <div class="brand-badge">
+              <div class="brand-icon-box">P5</div>
+              <div class="brand-text">
+                <h1>PENTIUM LAB</h1>
+                <p>Computer Engineering</p>
+              </div>
+            </div>
+            <button class="sidebar-close-btn" id="btn-close-sidebar" aria-label="Close menu">✕</button>
+          </div>
+
+          <!-- Quick Global Search -->
+          <div class="sidebar-search-box">
+            <div class="search-input-wrapper">
+              <span class="search-icon">🔍</span>
+              <input type="text" id="global-search-input" placeholder="Search instructions, terms..." />
+            </div>
+          </div>
+
+          <!-- Overall Syllabus Progress Meter -->
+          <div class="sidebar-progress-card">
+            <div class="progress-header">
+              <span>Syllabus Progress</span>
+              <span id="sidebar-progress-pct" style="color: var(--pentium-cyan);">0%</span>
+            </div>
+            <div class="progress-bar-track">
+              <div class="progress-bar-fill" id="sidebar-progress-fill" style="width: 0%;"></div>
+            </div>
+          </div>
+
+          <!-- Navigation Links -->
+          <div class="nav-group-title">Syllabus Modules</div>
+          <ul class="sidebar-nav-list">
+            <li>
+              <button class="nav-item-btn active" data-view-nav="dashboard">
+                <span class="nav-icon">🏠</span>
+                <span>Home Dashboard</span>
+              </button>
+            </li>
+            <li>
+              <button class="nav-item-btn" data-view-nav="module2" data-topic-target="m2-intro">
+                <span class="nav-icon">⚡</span>
+                <span>Module II: Instruction Set</span>
+                <span class="nav-badge">8 Topics</span>
+              </button>
+              <!-- Expandable Module II Topics -->
+              <ul class="subtopic-tree">
+                <li><button class="subtopic-btn" data-view-nav="module2" data-topic-target="m2-intro">4.1 Intro & Anatomy</button></li>
+                <li><button class="subtopic-btn" data-view-nav="module2" data-topic-target="m2-datamov">4.2 Data Movement</button></li>
+                <li><button class="subtopic-btn" data-view-nav="module2" data-topic-target="m2-arith">4.3 Binary Arithmetic</button></li>
+                <li><button class="subtopic-btn" data-view-nav="module2" data-topic-target="m2-logic">4.4 Logical & Shifts</button></li>
+                <li><button class="subtopic-btn" data-view-nav="module2" data-topic-target="m2-control">4.5 Control Transfer</button></li>
+                <li><button class="subtopic-btn" data-view-nav="module2" data-topic-target="m2-string">4.6 String & XLAT</button></li>
+                <li><button class="subtopic-btn" data-view-nav="module2" data-topic-target="m2-flags">4.7 Flag Control</button></li>
+                <li><button class="subtopic-btn" data-view-nav="module2" data-topic-target="m2-arch-compare">5.0 8086 vs 80386DX</button></li>
+              </ul>
+            </li>
+            <li>
+              <button class="nav-item-btn" data-view-nav="module3" data-topic-target="m3-seg">
+                <span class="nav-icon">🧠</span>
+                <span>Module III: Memory & Cache</span>
+                <span class="nav-badge">11 Topics</span>
+              </button>
+              <!-- Expandable Module III Topics -->
+              <ul class="subtopic-tree">
+                <li><button class="subtopic-btn" data-view-nav="module3" data-topic-target="m3-seg">6.1 Segmentation</button></li>
+                <li><button class="subtopic-btn" data-view-nav="module3" data-topic-target="m3-paging">6.2 2-Level Paging</button></li>
+                <li><button class="subtopic-btn" data-view-nav="module3" data-topic-target="m3-combined">6.3 Combined Translation</button></li>
+                <li><button class="subtopic-btn" data-view-nav="module3" data-topic-target="m3-seg-vs-paging">6.4 Seg vs Paging</button></li>
+                <li><button class="subtopic-btn" data-view-nav="module3" data-topic-target="m3-cache-fundamentals">7.1 Cache Hierarchy</button></li>
+                <li><button class="subtopic-btn" data-view-nav="module3" data-topic-target="m3-direct-mapping">7.2 Direct Mapping</button></li>
+                <li><button class="subtopic-btn" data-view-nav="module3" data-topic-target="m3-associative-mapping">7.3 Associative Mapping</button></li>
+                <li><button class="subtopic-btn" data-view-nav="module3" data-topic-target="m3-set-associative">7.4 Set-Associative</button></li>
+                <li><button class="subtopic-btn" data-view-nav="module3" data-topic-target="m3-replacement-algos">7.5 Replacement Algos</button></li>
+                <li><button class="subtopic-btn" data-view-nav="module3" data-topic-target="m3-cache-perf">7.6 Cache AMAT</button></li>
+                <li><button class="subtopic-btn" data-view-nav="module3" data-topic-target="m3-memory-hierarchy">7.7 System Integration</button></li>
+              </ul>
+            </li>
+          </ul>
+
+          <div class="nav-group-title" style="margin-top: 10px;">Hands-On & Exams</div>
+          <ul class="sidebar-nav-list">
+            <li>
+              <button class="nav-item-btn" data-view-nav="lab">
+                <span class="nav-icon">🔬</span>
+                <span>Interactive Lab</span>
+                <span class="nav-badge" style="background:var(--pentium-cyan); color:#fff;">7 Benches</span>
+              </button>
+            </li>
+            <li>
+              <button class="nav-item-btn" data-view-nav="practice">
+                <span class="nav-icon">📝</span>
+                <span>Practice & Exam Zone</span>
+                <span class="nav-badge">20 MCQs</span>
+              </button>
+            </li>
+            <li>
+              <button class="nav-item-btn" data-view-nav="cheatsheet">
+                <span class="nav-icon">📋</span>
+                <span>Revision & Cheat Sheets</span>
+              </button>
+            </li>
+          </ul>
+
+          <!-- Sidebar Footer Actions -->
+          <div class="sidebar-footer">
+            <button class="tactile-btn btn-sm" id="btn-open-glossary">
+              <span>📖</span> Technical Glossary (50+)
+            </button>
+            <button class="tactile-btn btn-sm" id="btn-open-bookmarks">
+              <span>📑</span> Saved Bookmarks
+            </button>
+          </div>
+        </aside>
+
+        <!-- ================================================================
+             MAIN CONTENT WORKSPACE
+             ================================================================ -->
+        <main id="main-container">
+          <!-- Top Sticky Header Bar -->
+          <header id="top-header">
+            <div class="header-left">
+              <button class="mobile-nav-toggle" id="btn-mobile-nav" aria-label="Toggle navigation">
+                ☰
+              </button>
+              <div class="breadcrumbs">
+                <span class="breadcrumb-root" id="bc-root">Pentium Lab</span>
+                <span class="breadcrumb-sep">/</span>
+                <span class="breadcrumb-active" id="bc-active">Home Dashboard</span>
+              </div>
+            </div>
+
+            <div class="header-right">
+              <button class="header-tool-btn" id="btn-toggle-sound" title="Toggle tactile sound effects">
+                <span>🔇</span> <span class="label">Sound</span>
+              </button>
+              <div class="tape-banner tape-cyan" style="font-size: 11px; padding: 4px 10px; transform: rotate(1deg);">
+                SEMESTER EXAM PREP
+              </div>
+            </div>
+          </header>
+
+          <!-- Main Viewport Section Views -->
+          <div class="view-viewport">
+            <!-- 1. Home Dashboard -->
+            <section id="view-dashboard" class="content-section active"></section>
+
+            <!-- 2. Module II View -->
+            <section id="view-module2" class="content-section"></section>
+
+            <!-- 3. Module III View -->
+            <section id="view-module3" class="content-section"></section>
+
+            <!-- 4. Interactive Lab View -->
+            <section id="view-lab" class="content-section"></section>
+
+            <!-- 5. Practice & Quizzes View -->
+            <section id="view-practice" class="content-section"></section>
+
+            <!-- 6. Revision & Cheat Sheets View -->
+            <section id="view-cheatsheet" class="content-section"></section>
+          </div>
+        </main>
+      </div>
+
+      <!-- ================================================================
+           SLIDE-OVER DRAWERS: GLOSSARY & BOOKMARKS
+           ================================================================ -->
+      <!-- Mobile Sidebar Backdrop Overlay -->
+      <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+
+      <div class="drawer-backdrop" id="drawer-backdrop"></div>
+
+      <!-- Glossary Drawer -->
+      <div class="side-drawer" id="drawer-glossary">
+        <div class="drawer-header">
+          <div class="drawer-title">Microprocessor Glossary</div>
+          <button class="drawer-close-btn" id="btn-close-glossary">✕ CLOSE</button>
+        </div>
+        <div class="drawer-content" id="glossary-drawer-items"></div>
+      </div>
+
+      <!-- Bookmarks Drawer -->
+      <div class="side-drawer" id="drawer-bookmarks">
+        <div class="drawer-header">
+          <div class="drawer-title">Saved Revision Bookmarks</div>
+          <button class="drawer-close-btn" id="btn-close-bookmarks">✕ CLOSE</button>
+        </div>
+        <div class="drawer-content" id="bookmarks-drawer-items"></div>
+      </div>
+    </div>
+
+    <!-- Bundled Application Scripts (Zero Build / 100% Offline / file:// protocol compatible) -->
+    <script src="./js/data-bundle.js"></script>
+    <script src="./js/curriculum-bundle.js"></script>
+    <script src="./js/simulators-bundle.js"></script>
+    <script src="./js/main-controller.js"></script>
+  </body>
+</html>

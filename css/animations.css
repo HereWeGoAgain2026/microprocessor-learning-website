@@ -1,0 +1,129 @@
+/* ==========================================================================
+   ANIMATIONS & 12 FPS STOP-MOTION CHOREOGRAPHY
+   Matching the Pentium Superscalar Architecture tactile video physics
+   ========================================================================== */
+
+/* 1. Stamp Slam Effect (High-impact stamp hit with rotation) */
+@keyframes stampSlam {
+  0% {
+    opacity: 0;
+    transform: scale(2.4) rotate(-22deg);
+  }
+  65% {
+    opacity: 1;
+    transform: scale(0.92) rotate(-6deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(-6deg);
+  }
+}
+
+.anim-stamp-slam {
+  animation: stampSlam 0.28s cubic-bezier(0.18, 0.89, 0.32, 1.25) forwards;
+}
+
+/* 2. Physical Card Drop with Snap */
+@keyframes cardDropIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-24px) scale(0.97);
+  }
+  70% {
+    opacity: 1;
+    transform: translateY(4px) scale(1.01);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.anim-card-drop {
+  animation: cardDropIn 0.25s cubic-bezier(0.2, 0.85, 0.35, 1.2) forwards;
+}
+
+/* 3. Hit and Miss Flash Animations */
+@keyframes flashHit {
+  0% {
+    background-color: var(--pentium-mint);
+    color: #ffffff;
+    transform: scale(1.02);
+  }
+  100% {
+    background-color: var(--pentium-mint-pale);
+    color: var(--ink-black);
+    transform: scale(1);
+  }
+}
+
+@keyframes flashMiss {
+  0% {
+    background-color: var(--pentium-coral);
+    color: #ffffff;
+    transform: scale(1.02);
+  }
+  100% {
+    background-color: var(--pentium-coral-pale);
+    color: var(--ink-black);
+    transform: scale(1);
+  }
+}
+
+/* 4. Conveyor Packet Shift (12 FPS Stepped Feel) */
+@keyframes stepShiftRight {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* 5. Subtitle Pill Float / Bounce */
+@keyframes pillFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.anim-float {
+  animation: pillFloat 3s ease-in-out infinite;
+}
+
+/* 6. Subtle Pulse for Active Pipeline Stages */
+@keyframes stagePulse {
+  0%, 100% {
+    box-shadow: 4px 6px 0px var(--pentium-cyan);
+  }
+  50% {
+    box-shadow: 6px 9px 0px var(--pentium-cyan);
+  }
+}
+
+.pipeline-stage-card.current {
+  animation: stagePulse 2s infinite ease-in-out;
+}
+
+/* ==========================================================================
+   REDUCED MOTION ACCESSIBILITY (Mandatory requirement)
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .anim-stamp-slam,
+  .anim-card-drop,
+  .anim-float,
+  .pipeline-stage-card.current {
+    animation: none !important;
+    transform: none !important;
+  }
+}
